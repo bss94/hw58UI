@@ -37,6 +37,7 @@ const Modal: React.FC<Props> = ({
                   btnConfig.map((button) => {
                     return <button className={`btn btn-${button.type}`}
                                    onClick={button.onClick}
+                                   key={button.type+button.label}
                     >
                       {button.label}
                     </button>;
@@ -44,8 +45,6 @@ const Modal: React.FC<Props> = ({
                 }
               </div>
               : <></>}
-
-
           </div>
         </div>
       </div>

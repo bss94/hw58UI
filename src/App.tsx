@@ -2,6 +2,7 @@ import {useState} from 'react';
 import './App.css';
 import Modal from './components/Modal/Modal';
 import {BtnConfig} from './types';
+import Alert from './components/Alert/Alert';
 
 
 const App = () => {
@@ -18,28 +19,35 @@ const App = () => {
     <>
       <main className="container-fluid">
         <div className="row mt-2">
-          <div className="col-4">
-
+          <div className="col-3"></div>
+          <div className="col-6">
+            <Alert/>
           </div>
-
-          <div className="col-4">
-            <button className="w-100 mb-3 btn btn-primary"
-                    onClick={() => setShowModal(true)}
-            >
-              Modal without btn
-            </button>
-            <button className="w-100 btn btn-success"
-                    onClick={() => setShowModalWithBtn(true)}
-            >
-              Modal with btn
-            </button>
-          </div>
-          <div className="col-4">
-
-          </div>
+          <div className="col-3"></div>
         </div>
-      </main>
+        <div className="row mt-2">
 
+        <div className="col-4">
+
+            </div>
+
+            <div className="col-4">
+              <button className="w-100 mb-3 btn btn-primary"
+                      onClick={() => setShowModal(true)}
+              >
+                Modal without btn
+              </button>
+              <button className="w-100 btn btn-success"
+                      onClick={() => setShowModalWithBtn(true)}
+              >
+                Modal with btn
+              </button>
+            </div>
+            <div className="col-4">
+
+            </div>
+          </div>
+      </main>
 
       <Modal show={showModalWithBtn}
              title={'Modal Title with button configs'}
@@ -49,7 +57,6 @@ const App = () => {
           modal content
         </div>
       </Modal>
-
       <Modal show={showModal}
              title={'Modal Title without button configs'}
              onClose={() => setShowModal(false)}>
@@ -57,6 +64,7 @@ const App = () => {
           modal content
         </div>
       </Modal>
+
     </>
   );
 };
