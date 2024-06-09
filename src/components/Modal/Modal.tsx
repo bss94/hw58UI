@@ -5,8 +5,9 @@ interface Props extends React.PropsWithChildren {
   show: boolean;
   title: string;
   onClose: React.MouseEventHandler;
-  btnConfig?:BtnConfig[]
+  btnConfig?: BtnConfig[];
 }
+
 const Modal: React.FC<Props> = ({
   show,
   title,
@@ -37,7 +38,7 @@ const Modal: React.FC<Props> = ({
                   btnConfig.map((button) => {
                     return <button className={`btn btn-${button.type}`}
                                    onClick={button.onClick}
-                                   key={button.type+button.label}
+                                   key={button.type + button.label}
                     >
                       {button.label}
                     </button>;

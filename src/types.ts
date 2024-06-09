@@ -1,5 +1,5 @@
-export interface BtnConfig{
-  type:string;
-  label:string;
-  onClick:()=>void;
+export interface BtnConfig {
+  type: string;
+  label: string;
+  onClick: () => void;
 }
