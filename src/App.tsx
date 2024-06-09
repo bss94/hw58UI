@@ -1,11 +1,18 @@
 import {useState} from 'react';
 import './App.css';
 import Modal from './components/Modal/Modal';
+import {BtnConfig} from './types';
 
 
 const App = () => {
-  const [state, setState] = useState();
   const [showModal,setShowModal]=useState(false);
+  const [showModalWithBtn,setShowModalWithBtn]=useState(false);
+
+  const btnConfig:BtnConfig[]=[
+    {type: 'primary', label: 'Continue', onClick: () => alert('clicked continue')},
+    {type: 'danger', label: 'Close', onClick: () => setShowModalWithBtn(false)}
+  ]
+
 
   return (
     <>
@@ -16,10 +23,15 @@ const App = () => {
           </div>
 
           <div className="col-4">
-            <button className="w-100 btn btn-primary"
+            <button className="w-100 mb-3 btn btn-primary"
                     onClick={() => setShowModal(true)}
             >
-              Order
+              Modal without btn
+            </button>
+            <button className="w-100 btn btn-success"
+                    onClick={() => setShowModalWithBtn(true)}
+            >
+              Modal with btn
             </button>
           </div>
           <div className="col-4">
@@ -29,12 +41,20 @@ const App = () => {
       </main>
 
 
-      <Modal show={showModal} title={'Order'} onClose={() => setShowModal(false)}>
+      <Modal show={showModalWithBtn}
+             title={'Modal Title with button configs'}
+             btnConfig={btnConfig}
+             onClose={() => setShowModalWithBtn(false)}>
         <div className="modal-body">
-          content
+          modal content
         </div>
-        <div className="modal-footer">
-          <button className="btn btn-danger" onClick={() => setShowModal(false)}>Cancel</button>
+      </Modal>
+
+      <Modal show={showModal}
+             title={'Modal Title without button configs'}
+             onClose={() => setShowModal(false)}>
+        <div className="modal-body">
+          modal content
         </div>
       </Modal>
     </>
