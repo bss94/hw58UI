@@ -1,5 +1,7 @@
 import React from 'react';
 import {BtnConfig} from '../../types';
+import MyMotion from '../MyMotion/MyMotion';
+
 
 interface Props extends React.PropsWithChildren {
   show: boolean;
@@ -24,30 +26,32 @@ const Modal: React.FC<Props> = ({
            style={{display: show ? 'block' : 'none'}}
            onClick={onClose}
       >
-        <div className="modal-dialog"
-             onClick={event => event.stopPropagation()}>
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5"> {title}</h1>
-              <button type="button" className="btn-close" aria-label="Close" onClick={onClose}></button>
-            </div>
-            {children}
-            {btnConfig !== undefined ?
-              <div className="modal-footer">
-                {
-                  btnConfig.map((button) => {
-                    return <button className={`btn btn-${button.type}`}
-                                   onClick={button.onClick}
-                                   key={button.type + button.label}
-                    >
-                      {button.label}
-                    </button>;
-                  })
-                }
+        <MyMotion show={show}>
+          <div className="modal-dialog"
+               onClick={event => event.stopPropagation()}>
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5"> {title}</h1>
+                <button type="button" className="btn-close" aria-label="Close" onClick={onClose}></button>
               </div>
-              : <></>}
+              {children}
+              {btnConfig !== undefined ?
+                <div className="modal-footer">
+                  {
+                    btnConfig.map((button) => {
+                      return <button className={`btn btn-${button.type}`}
+                                     onClick={button.onClick}
+                                     key={button.type + button.label}
+                      >
+                        {button.label}
+                      </button>;
+                    })
+                  }
+                </div>
+                : <></>}
+            </div>
           </div>
-        </div>
+        </MyMotion>
       </div>
     </>
   );

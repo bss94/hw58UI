@@ -1,9 +1,8 @@
 import {useState} from 'react';
-import './App.css';
 import Modal from './components/Modal/Modal';
 import {BtnConfig} from './types';
 import Alert from './components/Alert/Alert';
-
+import './App.css';
 
 const App = () => {
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +25,6 @@ const App = () => {
     {type: 'warning', label: 'open warning alert', onClick: () => setShowWarningAlert(true)},
   ];
 
-
   return (
     <>
       <main className="container-fluid">
@@ -37,7 +35,6 @@ const App = () => {
                    type={'success'}
             > This is Success alert without dismiss
             </Alert>
-
             <div className="mt-3">
               <Alert show={showPrimaryAlert}
                      type={'primary'}
@@ -48,7 +45,6 @@ const App = () => {
                 This is primary alert with dismiss without button
               </Alert>
             </div>
-
             <div className="mt-3">
               <Alert show={showWarningAlert}
                      type={'warning'}
@@ -60,7 +56,6 @@ const App = () => {
                 This is primary alert with dismiss on button to console
               </Alert>
             </div>
-
             <div className="mt-3">
               <Alert show={showAlert}
                      type={'danger'}
@@ -80,38 +75,27 @@ const App = () => {
           <div className="col-4"></div>
           <div className="col-4">
 
-            <button className="w-100 mb-3 btn btn-secondary"
-                    onClick={() => setShowModal(true)}
-            >
-              Modal without btn
-            </button>
+            {btnModal.map((btn) => {
+              return <button className={`w-100 mb-3 btn btn-${btn.type}`}
+                             onClick={btn.onClick}
+                             key={Math.random() * 100}
+              >
+                {btn.label}
+              </button>;
+            })}
 
-            <button className="w-100 mb-3 btn btn-success"
-                    onClick={() => setShowModalWithBtn(true)}
-            >
-              Modal with btn
-            </button>
-            <button className="w-100 mb-3 btn btn-danger"
-                    onClick={() => setShowAlert(true)}
-            >
-              Open danger alert
-            </button>
-            <button className="w-100 mb-3 btn btn-primary"
-                    onClick={() => setShowPrimaryAlert(true)}
-            >
-              Open primary alert
-            </button>
-            <button className="w-100 mb-3 btn btn-warning"
-                    onClick={() => setShowWarningAlert(true)}
-            >
-              Open warning alert
-            </button>
-
+            {btnAlert.map((btn) => {
+              return <button className={`w-100 mb-3 btn btn-${btn.type}`}
+                             onClick={btn.onClick}
+                             key={Math.random() * 100}
+              >
+                {btn.label}
+              </button>;
+            })}
           </div>
           <div className="col-4"></div>
         </div>
       </main>
-
       <Modal show={showModalWithBtn}
              title={'Modal Title with button configs'}
              btnConfig={btnConfig}
@@ -127,9 +111,7 @@ const App = () => {
           modal content
         </div>
       </Modal>
-
     </>
   );
 };
-
 export default App;

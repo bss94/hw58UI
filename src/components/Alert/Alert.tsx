@@ -1,10 +1,12 @@
 import React from 'react';
+import MyMotion from '../MyMotion/MyMotion';
+
 
 interface Props extends React.PropsWithChildren {
   type: string;
   onDismiss?: () => void;
-  dismissOnButton?:boolean;
-  show:boolean;
+  dismissOnButton?: boolean;
+  show: boolean;
 }
 
 const Alert: React.FC<Props> = ({
@@ -24,9 +26,9 @@ const Alert: React.FC<Props> = ({
     </div>
   );
 
-  if(onDismiss!==undefined){
-    if(dismissOnButton){
-      alertContainer= (
+  if (onDismiss !== undefined) {
+    if (dismissOnButton) {
+      alertContainer = (
         <div className={`alert alert-${type} alert-dismissible`}
              style={{display: show ? 'block' : 'none'}}
              role="alert"
@@ -40,24 +42,24 @@ const Alert: React.FC<Props> = ({
           >
           </button>
         </div>
-      )
-    }else {
-      alertContainer= (
+      );
+    } else {
+      alertContainer = (
         <div className={`alert alert-${type} alert-dismissible`}
-             style={{display: show ? 'block' : 'none',cursor:'pointer'}}
+             style={{display: show ? 'block' : 'none', cursor: 'pointer'}}
              role="alert"
              onClick={onDismiss}
         >
           {children}
         </div>
-      )
+      );
     }
   }
 
   return (
-    <>
+    <MyMotion show={show}>
       {alertContainer}
-    </>
+    </MyMotion>
   );
 };
 
