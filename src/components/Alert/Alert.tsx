@@ -14,41 +14,49 @@ const Alert: React.FC<Props> = ({
   dismissOnButton,
   children
 }) => {
+
+  let alertContainer = (
+    <div className={`alert alert-${type} alert-dismissible`}
+         style={{display: show ? 'block' : 'none'}}
+         role="alert"
+    >
+      {children}
+    </div>
+  );
+
+  if(onDismiss!==undefined){
+    if(dismissOnButton){
+      alertContainer= (
+        <div className={`alert alert-${type} alert-dismissible`}
+             style={{display: show ? 'block' : 'none'}}
+             role="alert"
+        >
+          {children}
+          <button type="button"
+                  className="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                  onClick={onDismiss}
+          >
+          </button>
+        </div>
+      )
+    }else {
+      alertContainer= (
+        <div className={`alert alert-${type} alert-dismissible`}
+             style={{display: show ? 'block' : 'none',cursor:'pointer'}}
+             role="alert"
+             onClick={onDismiss}
+        >
+          {children}
+        </div>
+      )
+    }
+  }
+
   return (
     <>
-      {
-        onDismiss !== undefined?
-          <>
-            {dismissOnButton !== undefined && dismissOnButton ?
-              <div className={`alert alert-${type} alert-dismissible`}
-                   style={{display: show ? 'block' : 'none'}}
-                   role="alert"
-              >
-                {children}
-                <button type="button"
-                        className="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close"
-                        onClick={onDismiss}
-                >
-                </button>
-              </div> :
-              <div className={`alert alert-${type} alert-dismissible`}
-                            style={{display: show ? 'block' : 'none'}}
-                            role="alert"
-                            onClick={onDismiss}
-              >
-                {children}
-              </div>
-            }
-          </>
-          : <div className={`alert alert-${type} alert-dismissible`}
-                 style={{display: show ? 'block' : 'none'}}
-                 role="alert"
-          >
-            {children}
-          </div>
-      }
+      {alertContainer}
     </>
   );
 };

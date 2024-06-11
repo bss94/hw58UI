@@ -9,10 +9,21 @@ const App = () => {
   const [showModal, setShowModal] = useState(false);
   const [showModalWithBtn, setShowModalWithBtn] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [showPrimaryAlert, setShowPrimaryAlert] = useState(true);
+  const [showWarningAlert, setShowWarningAlert] = useState(true);
 
   const btnConfig: BtnConfig[] = [
     {type: 'primary', label: 'Continue', onClick: () => setShowAlert(true)},
     {type: 'danger', label: 'Close', onClick: () => setShowModalWithBtn(false)}
+  ];
+  const btnModal: BtnConfig[] = [
+    {type: 'secondary', label: 'open modal', onClick: () => setShowModal(true)},
+    {type: 'success', label: 'open modal with btn', onClick: () => setShowModalWithBtn(true)}
+  ];
+  const btnAlert: BtnConfig[] = [
+    {type: 'primary', label: 'open primary alert', onClick: () => setShowPrimaryAlert(true)},
+    {type: 'danger', label: 'open danger alert', onClick: () => setShowAlert(true)},
+    {type: 'warning', label: 'open warning alert', onClick: () => setShowWarningAlert(true)},
   ];
 
 
@@ -26,24 +37,27 @@ const App = () => {
                    type={'success'}
             > This is Success alert without dismiss
             </Alert>
+
             <div className="mt-3">
-              <Alert show={true}
+              <Alert show={showPrimaryAlert}
                      type={'primary'}
                      onDismiss={() => {
-                       console.log('close alert');
+                       setShowPrimaryAlert(false);
                      }}
-              > This is primary alert with dismiss to console)
+              >
+                This is primary alert with dismiss without button
               </Alert>
             </div>
 
             <div className="mt-3">
-              <Alert show={true}
+              <Alert show={showWarningAlert}
                      type={'warning'}
                      onDismiss={() => {
-                       console.log('close alert on button click');
+                       setShowWarningAlert(false);
                      }}
                      dismissOnButton={true}
-              > This is primary alert with dismiss on button to console
+              >
+                This is primary alert with dismiss on button to console
               </Alert>
             </div>
 
@@ -54,10 +68,10 @@ const App = () => {
                        setShowAlert(false);
                      }}
                      dismissOnButton={true}
-              > This is danger alert with dismiss to close
+              >
+                This is danger alert with dismiss to close
               </Alert>
             </div>
-
           </div>
           <div className="col-3"></div>
         </div>
@@ -66,7 +80,7 @@ const App = () => {
           <div className="col-4"></div>
           <div className="col-4">
 
-            <button className="w-100 mb-3 btn btn-primary"
+            <button className="w-100 mb-3 btn btn-secondary"
                     onClick={() => setShowModal(true)}
             >
               Modal without btn
@@ -81,6 +95,16 @@ const App = () => {
                     onClick={() => setShowAlert(true)}
             >
               Open danger alert
+            </button>
+            <button className="w-100 mb-3 btn btn-primary"
+                    onClick={() => setShowPrimaryAlert(true)}
+            >
+              Open primary alert
+            </button>
+            <button className="w-100 mb-3 btn btn-warning"
+                    onClick={() => setShowWarningAlert(true)}
+            >
+              Open warning alert
             </button>
 
           </div>
